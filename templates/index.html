@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="row">
+    <div class="col-md-6">
+
+        <div class="card card-body">
+            <h5 class="card-title text-md">Filtro de busqueda</h5>
+            <form action="{{url_for('search')}}" method="POST">
+                <div class="form-group">
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        Numero de lados.
+                    </small>
+                    <select name="lado" class="form-control">
+                        <option selected value="_">Sin lados</option>
+                        <option value="3">3-Lados</option>
+                        <option value="4">4-Lados</option>
+                        <option value="5">5-Lados</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        Tiene radio.
+                    </small>
+                    <select name="radio" class="form-control">
+                        <option selected value="_">No</option>
+                        <option value="si">SI</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        Tiene angulos rectos.
+                    </small>
+                    <select name="angulo_recto" class="form-control">
+                        <option selected value="_">No</option>
+                        <option value="si">SI</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-block">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                    Consultar
+                </button>
+                <a class="btn btn-secondary btn-block" href="{{ url_for('reset') }}"><i class="fa-solid fa-magnifying-glass mr-2"></i>Resetear</a>
+
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="bs-component">
+            <div class="alert alert-dismissible alert-primary">
+                <i class="fa-solid fa-check-to-slot mr-2"></i>
+                Resultado de la busqueda.
+            </div>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+
+        <div class="card border-info mb-3">
+            <div class="card-body text-center">
+                <p class="bs-component">La figura geométrica es:</p>
+                <h4 class="card-title uppercase text-info">{{ message }}</h4>
+            </div>
+        </div>
+        {% endfor %}
+        {% else%}
+        <div class="card border-info mb-3">
+            <div class="card-body text-center">
+                <p class="bs-component">Realice una busqueda para visualizar los datos.</p>
+                <i style="font-size: 5rem;" class="fa-solid fa-database text-secondary"></i>
+            </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+    </div>
+</div>
+
+{% endblock %}
